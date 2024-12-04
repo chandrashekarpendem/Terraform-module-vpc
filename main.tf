@@ -96,3 +96,11 @@ resource "aws_route_table_association" "private_route_table_association_to_priva
   subnet_id = aws_subnet.private_subnet.*.id[count.index]
 
 }
+
+#in our account we have default vpc and it has default main  default route table now if you go anbd check only it has local and igw
+#routes , but we use a bastion node through vpc peering to connect to private instances, so we need add a route to that route table
+
+resource "aws_route" "adding_our_cidr_range_to_default_route_table" {
+  route_table_id = data.aws_vpc.default_vpc_info.main_route_table_id
+  destination_cidr_block = var.cidr_block
+}
