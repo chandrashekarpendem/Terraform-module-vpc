@@ -14,7 +14,7 @@ resource "aws_subnet" "private_subnet" {
   count  = length(var.private_cidr_block)
   vpc_id = aws_vpc.infra_vpc.id
   cidr_block = var.private_cidr_block[count.index]
-  tags       = merge(local.common_tags,{ Name= "${var.env}-public_subnet_${count.index + 1}" })
+  tags       = merge(local.common_tags,{ Name= "${var.env}-private_subnet_${count.index + 1}" })
 }
 
 resource "aws_vpc_peering_connection" "auto_peer" {
