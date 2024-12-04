@@ -54,7 +54,6 @@ resource "aws_route_table_association" "public_route_table_association_to_public
   route_table_id = aws_route_table.public_route_table.id
   subnet_id = aws_subnet.public_subnet.*.id[count.index]
 
-  tags       = merge(local.common_tags,{ Name= "${var.env}-public_route_table_association_with_public_subnet" })
 }
 
 #as we created the public subnet and private subnet now we need to create a nat_gateway for private subnets
@@ -95,5 +94,4 @@ resource "aws_route_table_association" "private_route_table_association_to_priva
   route_table_id = aws_route_table.private_route_table.id
   subnet_id = aws_subnet.private_subnet.*.id[count.index]
 
-  tags       = merge(local.common_tags,{ Name= "${var.env}-private_route_table_association_to_private_subnets" })
 }
