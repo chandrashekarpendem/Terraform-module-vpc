@@ -29,7 +29,7 @@ resource "aws_internet_gateway" "igw" {
   vpc_id = aws_vpc.infra_vpc.id
   tags       = merge(local.common_tags,{ Name= "${var.env}-igw" })
 }
-
+#when we create route table we directly add the routes once the route table is associated to subnets it gets all routes what it has
 resource "aws_route_table" "public_route_table" {
   vpc_id = aws_vpc.infra_vpc.id
 
@@ -51,4 +51,5 @@ resource "aws_route_table_association" "public_route_table_association_to_public
   route_table_id = aws_route_table.public_route_table.id
   subnet_id = aws_subnet.public_subnet.*.id[count.index]
 
+  tags       = merge(local.common_tags,{ Name= "${var.env}-public_route_table_association_with_public_subnet" })
 }
