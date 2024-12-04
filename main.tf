@@ -1,5 +1,6 @@
 #when you create a vpc a default route table gets created automatically.
 #that created route-table will automatically associated to subnets which are launched through  created vpc
+#NOTE: We should not use tags argument for aws_route_table_association
 resource "aws_vpc" "infra_vpc" {
   cidr_block = var.cidr_block
   tags       = merge(local.common_tags,{ Name= "${var.env}-vpc" })
