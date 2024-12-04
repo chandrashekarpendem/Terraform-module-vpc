@@ -61,7 +61,8 @@ resource "aws_route_table_association" "public_route_table_association_to_public
 #but to create nat_gateway we need to have elastic_ip so creating elastic_ip
 
 resource "aws_eip" "elastic_ip_for_NATGW" {
-  vpc = true
+#  vpc = true
+  domain = "vpc"
   tags       = merge(local.common_tags,{ Name= "${var.env}-elastic_ip_for_NATGW" })
 }
 
