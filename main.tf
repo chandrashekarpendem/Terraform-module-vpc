@@ -44,3 +44,11 @@ resource "aws_route_table" "public_route_table" {
   }
   tags       = merge(local.common_tags,{ Name= "${var.env}-public_route_table" })
 }
+
+resource "aws_route_table_association" "public_route_table_association_to_public_subnets" {
+#  we created two public subnets so we need to associate above public_route_table so we need to associate to two public_subnets
+  count = length(aws_subnet.public_subnet) # here we are iterating with count i.e you plz run times of public_subnet has
+  route_table_id = aws_route_table.public_route_table.id
+  subnet_id = aws_subnet.public_subnet.*.id[count.index]
+
+}
