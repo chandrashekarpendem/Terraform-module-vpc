@@ -39,7 +39,7 @@ resource "aws_route_table" "public_route_table" {
   }
 
   route {
-    cidr_block = data.awc_vpc.default_vpc_info.cidr_block
+    cidr_block = data.aws_vpc.default_vpc_info.cidr_block
     vpc_peering_connection_id = aws_vpc_peering_connection.auto_peer.id
   }
   tags       = merge(local.common_tags,{ Name= "${var.env}-public_route_table" })
