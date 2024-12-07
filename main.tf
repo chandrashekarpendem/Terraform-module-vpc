@@ -1,6 +1,6 @@
 #when you create a vpc a default route table gets created automatically.
 #that created route-table will automatically associated to subnets which are launched through  created vpc
-#NOTE: We should not use tags argument for aws_route_table_association
+#NOTE: We should not use tags argument for aws_route_table_association and external routes
 
 resource "aws_vpc" "infra_vpc" {
   cidr_block = var.cidr_block
@@ -15,10 +15,10 @@ resource "aws_vpc_peering_connection" "auto_peer" {
   tags       = merge(local.common_tags,{ Name= "${var.env}-peering_connection" })
 }
 
-resource "aws_internet_gateway" "igw" {
-  vpc_id = aws_vpc.infra_vpc.id
-  tags       = merge(local.common_tags,{ Name= "${var.env}-igw" })
-}
+#resource "aws_internet_gateway" "igw" {
+#  vpc_id = aws_vpc.infra_vpc.id
+#  tags       = merge(local.common_tags,{ Name= "${var.env}-igw" })
+#}
 
 
 resource "aws_eip" "elastic_ip_for_NATGW" {
