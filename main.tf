@@ -15,11 +15,10 @@ resource "aws_vpc_peering_connection" "auto_peer" {
   tags       = merge(local.common_tags,{ Name= "${var.env}-peering_connection" })
 }
 
-#resource "aws_internet_gateway" "igw" {
-#  vpc_id = aws_vpc.infra_vpc.id
-#  tags       = merge(local.common_tags,{ Name= "${var.env}-igw" })
-#}
-
+resource "aws_internet_gateway" "igw" {
+  vpc_id = aws_vpc.infra_vpc.id
+  tags       = merge(local.common_tags,{ Name= "${var.env}-internet_gw" })
+}
 
 resource "aws_eip" "elastic_ip_for_NATGW" {
 #  vpc = true used for old terraform version
