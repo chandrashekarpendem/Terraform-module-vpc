@@ -21,8 +21,8 @@ resource "aws_internet_gateway" "igw" {
 }
 
 resource "aws_eip" "elastic_ip_for_NATGW" {
-#  vpc = true used for old terraform version
-  domain = "vpc"
+  vpc = true
+#  domain = "vpc"
   tags       = merge(local.common_tags,{ Name= "${var.env}-elastic_ip_for_NATGW" })
 }
 
