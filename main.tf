@@ -32,7 +32,7 @@ resource "aws_eip" "elastic_ip_for_NATGW" {
 #
 #  tags       = merge(local.common_tags,{ Name= "${var.env}-NATGW_public_subnets" })
 #
-}
+#}
 
 
 
