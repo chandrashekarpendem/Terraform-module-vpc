@@ -26,6 +26,13 @@ resource "aws_eip" "elastic_ip_for_NATGW" {
   tags       = merge(local.common_tags,{ Name= "${var.env}-elastic_ip_for_NATGW" })
 }
 
+resource "aws_nat_gateway" "nat_gw" {
+  subnet_id = var.public_subnets_ids
+  allocation_id = aws_eip.elastic_ip_for_NATGW.id
+
+  tags       = merge(local.common_tags,{ Name= "${var.env}-NATGW_public_subnets" })
+
+}
 
 
 
