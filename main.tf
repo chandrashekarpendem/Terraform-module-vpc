@@ -40,10 +40,10 @@ resource "aws_internet_gateway" "igw" {
 
 
 
-resource "aws_nat_gateway" "nat_gw" {
-  subnet_id = lookup(lookup(module.public_subnets, "public",null ),"subnet_ids", null )[0]
-  allocation_id = aws_eip.elastic_ip_for_NATGW.id
-
-  tags       = merge(local.common_tags,{ Name= "${var.env}-NATGW_public_subnets" })
-
-}
+#resource "aws_nat_gateway" "nat_gw" {
+#  subnet_id = lookup(lookup(module.public_subnets, "public",null ),"subnet_ids", null )[0]
+#  allocation_id = aws_eip.elastic_ip_for_NATGW.id
+#
+#  tags       = merge(local.common_tags,{ Name= "${var.env}-NATGW_public_subnets" })
+#
+#}
