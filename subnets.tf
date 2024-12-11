@@ -33,5 +33,5 @@ module "private_subnets" {
   vpc_id            = aws_vpc.infra_vpc.id
   vpc_peering_connection_id = aws_vpc_peering_connection.auto_peer.id
   tags              = local.common_tags
-#  nat_gw_id        = aws_nat_gateway.nat_gw.id
+  nat_gw_id        = aws_nat_gateway.nat_gw.id
 }
