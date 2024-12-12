@@ -6,6 +6,8 @@ resource "aws_subnet" "subnet" {
   tags       = merge(local.common_tags,{ Name= "${var.env}-${var.name}-subnet_${count.index + 1}" })
 }
 
+#NOTE: HERE the below route has only one route and another is mentioned separately, but you run for the first time you run adding two routes but when you run for the second time its detecting that i have only route internally and deleting the external route then if you run for 3rd time its adding external route solving it by lifecycle ignore_changes
+
 resource "aws_route_table" "route_table" {
   vpc_id = var.vpc_id
 
@@ -13,6 +15,11 @@ resource "aws_route_table" "route_table" {
   route {
     cidr_block                = data.aws_vpc.default_vpc_info.cidr_block
     vpc_peering_connection_id = var.vpc_peering_connection_id
+
+  }
+
+  lifecycle {
+    ignore_changes = [routes,]
   }
   tags       = merge(local.common_tags,{ Name= "${var.env}-${var.name}route_table" })
 
