@@ -19,7 +19,7 @@ resource "aws_route_table" "route_table" {
   }
 
   lifecycle {
-    ignore_changes = [routes,]
+    ignore_changes = [route,]
   }
   tags       = merge(local.common_tags,{ Name= "${var.env}-${var.name}route_table" })
 
